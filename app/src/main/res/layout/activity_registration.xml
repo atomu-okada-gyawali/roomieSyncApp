@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/shape1"
+    android:id="@+id/main"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration"
+        android:textSize="24sp"
+        android:textColor="@color/primaryTextColor"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="24dp">
+
+        <EditText
+            android:id="@+id/registerFname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@android:drawable/editbox_background" />
+
+        <EditText
+            android:id="@+id/registerAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/registerContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:backgroundTint="@color/backPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/go2LoginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="16dp"
+            android:text="Go to login"
+            android:textColor="@android:color/holo_blue_dark" />
+
+    </LinearLayout>
+
+</LinearLayout>

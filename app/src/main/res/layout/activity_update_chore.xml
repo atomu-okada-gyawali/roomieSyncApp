@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.activity.AddChoreActivity">
+
+    <!-- Chore Name -->
+    <TextView
+        android:id="@+id/nameLblUC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chore Name"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/choreNameInputUC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter chore name"
+        android:inputType="text"
+        android:layout_marginTop="8dp" />
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/dateLblUC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <DatePicker
+        android:id="@+id/datePickerUC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <!-- User -->
+    <TextView
+        android:id="@+id/userLblUC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/userNameInputUC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter user name"
+        android:inputType="textPersonName"
+        android:layout_marginTop="8dp" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/updateChoreBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Update Chore" />
+
+</LinearLayout>

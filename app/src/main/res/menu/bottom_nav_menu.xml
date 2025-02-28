@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Chores"
+        android:icon="@drawable/chore"
+        android:id = "@+id/chore_btn"/>
+    <item android:title="Expense Sharing"
+        android:icon="@drawable/expense_sharing"
+        android:id="@+id/expense_btn"/>
+    <item android:title="Roommate Profiles"
+        android:icon="@drawable/roommates"
+        android:id="@+id/roommate_btn"/>
+</menu>

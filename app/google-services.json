@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "313916462323",
+    "project_id": "roomiesync-d5fda",
+    "storage_bucket": "roomiesync-d5fda.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313916462323:android:d083d99ab9fad1dcdf1386",
+        "android_client_info": {
+          "package_name": "com.example.roomiesync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV6PDLOVEI0T99O4rHl0neWbXCf4ftrkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

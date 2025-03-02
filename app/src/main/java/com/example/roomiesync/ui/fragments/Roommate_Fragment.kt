@@ -1,60 +1,93 @@
-package com.example.roomiesync.ui.fragments
+package com.example.finaltaskmanager.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import android.view.ViewGroup
+import android.widget.*
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import com.example.roomiesync.R
+import com.example.roomiesync.repository.UserRepositoryImpl
+import com.example.roomiesync.ui.activity.LoginActivity
+import com.example.roomiesync.viewmodel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Roommate_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Roommate_Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var auth: FirebaseAuth
+    private lateinit var userRepository: UserRepositoryImpl
+    private lateinit var currentEmailTextView: TextView
+    private lateinit var currentUsernameTextView: TextView
+    private lateinit var logoutCardView: CardView
+    private lateinit var currentAddressTextView:TextView
+    private lateinit var currentContactTextView:TextView
+    private lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_roommate_, container, false)
-    }
+        // Inflate the layout (ensure the file name matches your XML file, here it's fragment_profile2.xml)
+        val view = inflater.inflate(R.layout.fragment_roommate_, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Roommate_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Roommate_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        auth = FirebaseAuth.getInstance()
+
+
+        var repo = UserRepositoryImpl()
+        userViewModel = UserViewModel(repo)
+        // Bind UI components from the XML
+        currentEmailTextView = view.findViewById(R.id.currentEmail)
+        currentContactTextView = view.findViewById(R.id.currentContact)
+        currentUsernameTextView = view.findViewById(R.id.currentUsername)
+        currentAddressTextView= view.findViewById(R.id.currentAddress)
+        logoutCardView = view.findViewById(R.id.logout)
+
+        // Display the currently logged in user's email and username directly from FirebaseAuth and Database
+        val currentUser = auth.currentUser
+        println(currentUser)
+        if (currentUser != null) {
+
+            val userId = currentUser.uid
+            println("Fetching user with ID: $userId") // Log the user ID
+            userViewModel.getUserById(userId) { userModel, success, message ->
+
+                if (userModel != null) {
+                    currentUsernameTextView.text = "Username : ${userModel.name}"
+                    currentAddressTextView.text = "Address: ${userModel.address}"
+                    currentEmailTextView.text = "Email:${userModel.email}"
+                    currentContactTextView.text = "Contact:${userModel.contact}"
+
+                } else {
+                    currentUsernameTextView.text = "Username:"
+                    currentAddressTextView.text = "Address:"
+                    currentEmailTextView.text = "Email:"
+                    currentContactTextView.text = "Contact:"
+
+        Toast.makeText(requireContext(), "Failed to fetch user: $message", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "userId: ${currentUser.uid}", Toast.LENGTH_SHORT).show()
                 }
             }
+        } else {
+            currentEmailTextView.text = "Not logged in"
+            currentUsernameTextView.text = "Username : N/A"
+        }
+
+        // Set click listener for logout
+        logoutCardView.setOnClickListener {
+            logout()
+        }
+        return view
+    }
+
+    private fun logout() {
+        auth.signOut()
+        val intent = Intent(activity, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        activity?.finish()
     }
 }
+

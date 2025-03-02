@@ -4,7 +4,7 @@ import com.example.roomiesync.model.UserModel
 import com.example.roomiesync.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
 
-class UserViewModel(val repo : UserRepository) {
+class UserViewModel(val repo:UserRepository) {
     fun login(email:String,password:String,
               callback:(Boolean,String)->Unit){
         repo.login(email,password, callback)
@@ -28,4 +28,11 @@ class UserViewModel(val repo : UserRepository) {
     fun getCurrentUser() : FirebaseUser?{
         return repo.getCurrentUser()
     }
+    fun getUserById(userId: String,
+                    callback: (UserModel?, Boolean, String) -> Unit){
+        repo.getUserById(userId, callback)
+    }
+
+
+
 }

@@ -66,10 +66,9 @@ class UserRepositoryImpl : UserRepository {
         userModel: UserModel,
         callback: (Boolean, String) -> Unit
     ) {
-        val id = ref.push().key.toString()
-        userModel.userId = id
+        userModel.userId = userId // Use the provided userId from the signup method
 
-        ref.child(id).setValue(userModel).addOnCompleteListener {
+        ref.child(userId).setValue(userModel).addOnCompleteListener {
             if (it.isSuccessful) {
                 callback(true, "User added successfully")
             } else {
@@ -81,10 +80,9 @@ class UserRepositoryImpl : UserRepository {
 
     override fun getUserById(
         userId: String,
-        data: MutableMap<String, Any>,
         callback: (UserModel?, Boolean, String) -> Unit
     ) {
-        ref.child(userId).addValueEventListener(object : ValueEventListener {
+        ref.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val model = snapshot.getValue(UserModel::class.java)

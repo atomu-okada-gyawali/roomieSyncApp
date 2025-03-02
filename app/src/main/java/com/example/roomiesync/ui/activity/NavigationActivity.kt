@@ -7,7 +7,7 @@ import com.example.roomiesync.R
 import com.example.roomiesync.databinding.ActivityNavigationBinding
 import com.example.roomiesync.ui.fragments.ChoreFragment
 import com.example.roomiesync.ui.fragments.ExpenseFragment
-import com.example.roomiesync.ui.fragments.Roommate_Fragment
+import com.example.finaltaskmanager.ui.fragment.Roommate_Fragment
 
 class NavigationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNavigationBinding

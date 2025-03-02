@@ -10,36 +10,36 @@ import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.roomiesync.adapter.ChoreAdapter
-import com.example.roomiesync.databinding.FragmentChoreBinding
-import com.example.roomiesync.repository.ChoreRepositoryImpl
-import com.example.roomiesync.ui.activity.AddChoreActivity
-import com.example.roomiesync.viewmodel.ChoreViewModel
+import com.example.roomiesync.adapter.ExpenseAdapter
+import com.example.roomiesync.databinding.FragmentExpenseBinding
+import com.example.roomiesync.repository.ExpenseRepositoryImpl
+import com.example.roomiesync.ui.activity.AddExpenseActivity
+import com.example.roomiesync.viewmodel.ExpenseViewModel
 
 class ExpenseFragment : Fragment() {
-    lateinit var binding: FragmentChoreBinding
-    lateinit var choreViewModel: ChoreViewModel
-    lateinit var adapter: ChoreAdapter
+    lateinit var binding: FragmentExpenseBinding
+    lateinit var expenseViewModel: ExpenseViewModel
+    lateinit var adapter: ExpenseAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentChoreBinding.inflate(inflater, container, false)
+        binding = FragmentExpenseBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repo = ChoreRepositoryImpl()
-        choreViewModel = ChoreViewModel(repo)
-        adapter = ChoreAdapter(requireContext(), ArrayList())
+        val repo = ExpenseRepositoryImpl()
+        expenseViewModel = ExpenseViewModel(repo)
+        adapter = ExpenseAdapter(requireContext(), ArrayList())
 
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewExpense.adapter = adapter
+        binding.recyclerViewExpense.layoutManager = LinearLayoutManager(requireContext())
 
-        choreViewModel.loading.observe(viewLifecycleOwner) { loading ->
+        expenseViewModel.loading.observe(viewLifecycleOwner) { loading ->
             if(loading){
                 binding.progressBar2.visibility = View.VISIBLE
             }else{
@@ -48,11 +48,11 @@ class ExpenseFragment : Fragment() {
 
         }
 
-        choreViewModel.getAllChores.observe(viewLifecycleOwner) {
+        expenseViewModel.getAllExpenses.observe(viewLifecycleOwner) {
             it?.let { adapter.updateData(it) }
         }
-        choreViewModel.getAllChores()
-        choreViewModel.getAllChores.observe(viewLifecycleOwner){ it ->
+        expenseViewModel.getAllExpenses()
+        expenseViewModel.getAllExpenses.observe(viewLifecycleOwner){ it ->
 
             it?.let{
                 adapter.updateData(it)
@@ -60,8 +60,8 @@ class ExpenseFragment : Fragment() {
 
         }
 
-        binding.floatingActionButton.setOnClickListener {
-            val intent = Intent(requireContext(), AddChoreActivity::class.java)
+        binding.floatingAddExpenseBtn.setOnClickListener {
+            val intent = Intent(requireContext(), AddExpenseActivity::class.java)
             startActivity(intent)
         }
 
@@ -76,11 +76,11 @@ class ExpenseFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val projectId = adapter.getchoreId(viewHolder.adapterPosition)
-                choreViewModel.deleteChore(projectId) { success, message ->
+                val projectId = adapter.getexpenseId(viewHolder.adapterPosition)
+                expenseViewModel.deleteExpense(projectId) { success, message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
-        }).attachToRecyclerView(binding.recyclerView) // Corrected position
+        }).attachToRecyclerView(binding.recyclerViewExpense) // Corrected position
     }
 }

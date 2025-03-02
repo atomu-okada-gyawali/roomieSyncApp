@@ -25,10 +25,10 @@ class UpdateChoreActivity : AppCompatActivity() {
         binding = ActivityUpdateChoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var repo = ChoreRepositoryImpl()
+        val repo = ChoreRepositoryImpl()
         choreViewModel = ChoreViewModel(repo)
 
-        var choreId = intent.getStringExtra("choreId").toString()
+        val choreId = intent.getStringExtra("choreId").toString()
 
         choreViewModel.getChoreById(choreId)
         choreViewModel.chore.observe(this) {
@@ -47,11 +47,22 @@ class UpdateChoreActivity : AppCompatActivity() {
         loadingUtils = LoadingUtils(this)
 
         binding.updateChoreBtn.setOnClickListener {
-            var name = binding.choreNameInputUC.text.toString()
-            var date = getDatePickerLongValue() // Calling the function here
-            var userName = binding.userNameInputUC.text.toString()
+            val name = binding.choreNameInputUC.text.toString()
+            val date = getDatePickerLongValue() // Calling the function here
+            val userName = binding.userNameInputUC.text.toString()
 
-            var updatedData = mutableMapOf<String, Any>()
+            // Input validations
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Please enter a chore name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (userName.isEmpty()) {
+                Toast.makeText(this, "Please enter a user name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val updatedData = mutableMapOf<String, Any>()
             updatedData["choreName"] = name
             updatedData["date"] = date
             updatedData["userName"] = userName

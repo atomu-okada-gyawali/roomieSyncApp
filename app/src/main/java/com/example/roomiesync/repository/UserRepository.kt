@@ -18,7 +18,6 @@ interface UserRepository {
     fun addUserToDatabase(userId: String, userModel: UserModel,
                           callback: (Boolean, String) -> Unit)
 fun getUserById(        userId: String,
-                        data: MutableMap<String, Any>,
                         callback: (UserModel?,Boolean, String) -> Unit);
 fun getAllUsers(
     callback: (List<UserModel>?,Boolean, String) -> Unit);
@@ -26,5 +25,6 @@ fun updateUser(userId: String,
                data: MutableMap<String, Any>,
                callback: (Boolean, String)  -> Unit);
 fun deleteUser(productId: String, callback: (Boolean, String) -> Unit);
+
 
 }

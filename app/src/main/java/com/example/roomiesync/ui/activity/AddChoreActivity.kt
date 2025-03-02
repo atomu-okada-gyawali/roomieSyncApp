@@ -6,7 +6,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.get
 import com.example.roomiesync.R
 import com.example.roomiesync.databinding.ActivityAddChore2Binding
 import com.example.roomiesync.model.ChoreModel
@@ -15,15 +14,12 @@ import com.example.roomiesync.utils.LoadingUtils
 import com.example.roomiesync.viewmodel.ChoreViewModel
 import java.util.Calendar
 
-
 class AddChoreActivity : AppCompatActivity() {
 
     lateinit var choreViewModel: ChoreViewModel
     lateinit var loadingUtils: LoadingUtils
-
-
-
     lateinit var binding: ActivityAddChore2Binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         fun getDatePickerLongValue(): Long {
             val year = binding.datePicker.year
@@ -37,6 +33,7 @@ class AddChoreActivity : AppCompatActivity() {
             // Get the long value (milliseconds)
             return calendar.timeInMillis
         }
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityAddChore2Binding.inflate(layoutInflater)
@@ -44,31 +41,41 @@ class AddChoreActivity : AppCompatActivity() {
         loadingUtils = LoadingUtils(this)
         val repo = ChoreRepositoryImpl()
         choreViewModel = ChoreViewModel(repo)
+
         binding.addChoreBtn.setOnClickListener {
             loadingUtils.show()
-            var name = binding.choreNameInput.text.toString()
-            var date = getDatePickerLongValue()
-            var userName = binding.userNameInput.text.toString()
+            val name = binding.choreNameInput.text.toString()
+            val date = getDatePickerLongValue()
+            val userName = binding.userNameInput.text.toString()
 
-            var model = ChoreModel("",name,date,userName)
+            // Input validations
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Please enter a chore name", Toast.LENGTH_SHORT).show()
+                loadingUtils.dismiss()
+                return@setOnClickListener
+            }
 
-            choreViewModel.addChore(model){
-                    success,message->
-                if(success){
-                    Toast.makeText(this@AddChoreActivity,
-                        message,
-                        Toast.LENGTH_LONG).show()
+            if (userName.isEmpty()) {
+                Toast.makeText(this, "Please enter a user name", Toast.LENGTH_SHORT).show()
+                loadingUtils.dismiss()
+                return@setOnClickListener
+            }
+
+            // Create the chore model if validations pass
+            val model = ChoreModel("", name, date, userName)
+
+            choreViewModel.addChore(model) { success, message ->
+                if (success) {
+                    Toast.makeText(this@AddChoreActivity, message, Toast.LENGTH_LONG).show()
                     loadingUtils.dismiss()
                     finish()
-                }else{
-                    Toast.makeText(this@AddChoreActivity,
-                        message,
-                        Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this@AddChoreActivity, message, Toast.LENGTH_LONG).show()
                     loadingUtils.dismiss()
                 }
             }
-
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

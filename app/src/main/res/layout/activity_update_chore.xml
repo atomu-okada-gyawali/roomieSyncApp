@@ -4,14 +4,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="30dp"
     tools:context=".ui.activity.AddChoreActivity">
 
     <!-- Chore Name -->
     <TextView
         android:id="@+id/nameLblUC"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Chore Name"
         android:textSize="16sp" />
@@ -20,18 +21,18 @@
         android:id="@+id/choreNameInputUC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Enter chore name"
-        android:inputType="text"
-        android:layout_marginTop="8dp" />
+        android:inputType="text" />
 
     <!-- Date -->
     <TextView
         android:id="@+id/dateLblUC"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Date"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:textSize="16sp" />
 
     <DatePicker
         android:id="@+id/datePickerUC"
@@ -42,26 +43,26 @@
     <!-- User -->
     <TextView
         android:id="@+id/userLblUC"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="User"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/userNameInputUC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Enter user name"
-        android:inputType="textPersonName"
-        android:layout_marginTop="8dp" />
+        android:inputType="textPersonName" />
 
     <!-- Submit Button -->
     <Button
         android:id="@+id/updateChoreBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:text="Update Chore" />
 

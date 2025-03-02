@@ -13,6 +13,12 @@
         android:theme="@style/Theme.RoomieSync"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.UpdateExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddExpenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.UpdateChoreActivity"
             android:exported="false"
             android:theme="@style/Theme.RoomieSync" />
@@ -47,16 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.DashboardActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RoomieSync">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="true">

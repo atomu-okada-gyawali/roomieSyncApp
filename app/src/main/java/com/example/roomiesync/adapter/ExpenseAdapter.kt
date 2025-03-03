@@ -43,9 +43,9 @@ class ExpenseAdapter(var context: Context,
     }
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
-        holder.expenseName.text = data[position].expenseName
-        holder.price.text = data[position].expenseAmt.toString()
-        holder.userName.text = data[position].userName
+        holder.expenseName.text = "Expense: ${data[position].expenseName }"
+        holder.price.text = "Amount: ${data[position].expenseAmt.toString()}"
+        holder.userName.text = "User: ${data[position].userName}"
 
         holder.updateBtn.setOnClickListener {
            val intent = Intent(context, UpdateExpenseActivity::class.java)

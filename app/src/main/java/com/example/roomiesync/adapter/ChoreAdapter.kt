@@ -42,9 +42,9 @@ class ChoreAdapter(var context: Context,
     }
 
     override fun onBindViewHolder(holder: ChoreViewHolder, position: Int) {
-        holder.choreName.text = data[position].choreName
-        holder.date.text = convertLongToDateString(data[position].date)
-        holder.userName.text = data[position].userName
+        holder.choreName.text = "Chore: ${data[position].choreName}"
+        holder.date.text = "Date: ${convertLongToDateString(data[position].date)}"
+        holder.userName.text = "User: ${data[position].userName}"
 
         holder.updateBtn.setOnClickListener {
            val intent = Intent(context, UpdateChoreActivity::class.java)
